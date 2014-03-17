@@ -8,7 +8,7 @@ import com.fb.service.UserService;
 public class UserServiceImpl implements UserService {
 
     public String getUserName() {
-        return "First Blood.";
+        return "First Blood";
     }
 
 }
