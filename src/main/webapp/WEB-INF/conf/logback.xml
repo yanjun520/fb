@@ -23,7 +23,7 @@
 		</encoder>
 	</appender>
 	<!-- log -->
-	<logger name="com.panguso" additivity="false" level="info">
+	<logger name="com.fb" additivity="false" level="info">
 		<appender-ref ref="main" />
 		<appender-ref ref="stdout" />
 	</logger>
