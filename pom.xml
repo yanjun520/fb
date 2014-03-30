@@ -17,6 +17,7 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.0.1</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -73,7 +74,7 @@
 			<artifactId>logback-core</artifactId>
 			<version>1.0.13</version>
 		</dependency>
-		
+
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -108,7 +109,7 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.13</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
-		
+
 		<dependency>
 			<groupId>cglib</groupId>
 			<artifactId>cglib</artifactId>
@@ -119,6 +120,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>fb</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -129,6 +131,104 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<!-- ${project.build.directory} -->
+				<!-- 参考API http://ant.apache.org/manual/tasksoverview.html -->
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<id>compile</id>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<copy todir="${project.build.outputDirectory}/com/fb/dao/sql">
+									<fileset dir="${project.build.sourceDirectory}/com/fb/dao/sql"
+										includes="*.xml" />
+								</copy>
+							</tasks>
+						</configuration>
+					</execution>
+					<execution>
+						<phase>package</phase>
+						<id>package</id>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<mkdir dir="${project.build.directory}/deploy" />
+								<copy
+									file="${project.build.directory}/${project.build.finalName}.war"
+									todir="${project.build.directory}/deploy" />
+							</tasks>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-antrun-plugin</artifactId>
+										<versionRange>[1.7,)</versionRange>
+										<goals>
+											<goal>run</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
+	<!-- mvn clean install -Pdev -->
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<app_config_path>src/main/config/dev</app_config_path>
+			</properties>
+		</profile>
+		<profile>
+			<id>dev2</id>
+			<properties>
+				<app_config_path>src/main/config/test</app_config_path>
+			</properties>
+		</profile>
+		<profile>
+			<id>local</id>
+			<properties>
+				<app_config_path>src/main/config/local</app_config_path>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<app_config_path>src/main/config/prod</app_config_path>
+			</properties>
+		</profile>
+	</profiles>
 </project>
