@@ -23,7 +23,7 @@ public class IndexController {
     @Resource
     private QueryService queryService;
     
-	@RequestMapping("/")
+	@RequestMapping()
 	@ResponseBody
     public String index(Model model) {
         return "Welcome";
