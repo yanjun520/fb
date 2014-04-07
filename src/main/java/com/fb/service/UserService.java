@@ -1,12 +1,11 @@
 package com.fb.service;
 
-
+import com.fb.po.User;
 
 public interface UserService {
     
-    public String getUserName();
+    public User getUserByName(String userName);
     
-//    public User getUserInfo(int userId);
-    
+    public User getUserById(long uesrId);
     
 }

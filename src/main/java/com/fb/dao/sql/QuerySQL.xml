@@ -11,7 +11,7 @@
 	<!--通过id获取resultPage记录 -->
 	<select id="getQueryById_sql" parameterType="long" resultType="Query">   
 		<![CDATA[   
-		select * from query where id=#{id}   
+		select * from query where id=#{id}
 		]]>
 	</select>
 

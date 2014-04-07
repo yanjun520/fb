@@ -12,9 +12,19 @@ public class User {
     
     private String userName;
     
-    private int userType;
+    private String password;
     
-    private String displayName;
+//    private int userType;
+//    
+//    private String realName;
+//    
+//    private int phone;
+//    
+//    private String email;
+//    
+//    private int registTime;
+//    
+//    private int lastLoginTime;
 
     
     public long getUserId() {
@@ -37,25 +47,13 @@ public class User {
     }
 
     
-    public int getUserType() {
-        return userType;
+    public String getPassword() {
+        return password;
     }
 
     
-    public void setUserType(int userType) {
-        this.userType = userType;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
-    
-    
-    
 }

@@ -3,6 +3,8 @@ package com.fb.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,17 +13,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fb.po.Query;
+import com.fb.po.User;
+import com.fb.service.LoginService;
 import com.fb.service.QueryService;
-import com.fb.service.UserService;
 
 @Controller
 public class IndexController {
     
-    @Autowired
-    private UserService userService;
-    
     @Resource
     private QueryService queryService;
+    @Autowired
+    private LoginService loginService;
     
 	@RequestMapping()
 	@ResponseBody
@@ -31,11 +33,18 @@ public class IndexController {
 	
 	@RequestMapping("/hello")
     @ResponseBody
-    public String hello(Model model) {
-	    String userName = userService.getUserName();
-        return "Hello " + userName;
+    public String hello(Model model,
+            HttpServletRequest request,
+            HttpServletResponse response) {
+	    
+	    User user = loginService.checkLogin();
+	    
+	    if (user == null) {
+	        return "Please login.";
+	    } else {
+	        return "Hello " + user.getUserName();
+	    }
     }
-	
 	
 	@RequestMapping("/query")
     @ResponseBody
