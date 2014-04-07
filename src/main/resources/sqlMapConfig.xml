@@ -18,10 +18,12 @@
 	<!-- 别名配置 -->
 	<typeAliases>
 		<typeAlias alias="Query" type="com.fb.po.Query" />
+		<typeAlias alias="User" type="com.fb.po.User" />
 	</typeAliases>
 
 	<!-- 指定映射器路径 -->
 	<mappers>
 		<mapper resource="com/fb/dao/sql/QuerySQL.xml" />
+		<mapper resource="com/fb/dao/sql/UserSQL.xml" />
 	</mappers>
 </configuration>
