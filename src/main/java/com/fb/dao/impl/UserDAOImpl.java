@@ -48,7 +48,8 @@ public class UserDAOImpl implements UserDAO {
 	@Override
     public void saveUser(User user) {
         try {
-            sqlSession.insert("UserSQL.saveUser_sql", user);
+            int id = sqlSession.insert("UserSQL.saveUser_sql", user);
+            System.out.println("@id: " + id);
         } catch (Exception e) {
             e.printStackTrace();
         }
