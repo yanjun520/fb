@@ -24,7 +24,7 @@ public class UserDAOImpl implements UserDAO {
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public User getUserById(long userId) {
+	public User getUserByUserId(long userId) {
 		try {
 		    User result = sqlSession.selectOne("UserSQL.getUserById_sql", userId);
 			return result;
@@ -35,7 +35,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 	@Override
-    public User getUserByName(String userName) {
+    public User getUserByUserName(String userName) {
         try {
             User result = sqlSession.selectOne("UserSQL.getUserByName_sql", userName);
             return result;
@@ -46,10 +46,9 @@ public class UserDAOImpl implements UserDAO {
     }
 	
 	@Override
-    public void saveUser(User user) {
+    public void addUser(User user) {
         try {
-            int id = sqlSession.insert("UserSQL.saveUser_sql", user);
-            System.out.println("@id: " + id);
+            sqlSession.insert("UserSQL.saveUser_sql", user);
         } catch (Exception e) {
             e.printStackTrace();
         }

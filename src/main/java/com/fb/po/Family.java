@@ -5,7 +5,7 @@ package com.fb.po;
  * @author LGJ
  *
  * @date 2014年3月30日
- * @desc 学生家庭model
+ * @desc 家庭model
  */
 public class Family {
 

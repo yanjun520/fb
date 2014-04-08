@@ -21,14 +21,9 @@ public interface ClazzService {
     public List<Clazz> getClazzesBySchoolId(User user, int schoolId);
     
     /**
-     * 按用户，学校获取班级列表
-     */
-    public List<Clazz> getClazzesByUserIdAndSchoolId(User user, int schoolId);
-    
-    /**
      * 获取班级信息
      */
-    public List<Clazz> getClazzByClazzId(User user, int clazzId);
+    public Clazz getClazzByClazzId(User user, int clazzId);
     
     /**
      * 获取班级所有成员

@@ -3,12 +3,18 @@ package com.fb.dao;
 import com.fb.po.User;
 
 
+/**
+ * @author LGJ
+ *
+ * @date 2014年4月8日
+ * @desc 用户dao
+ */
 public interface UserDAO {
 
-    User getUserById(long userId);
+    User getUserByUserId(long userId);
     
-    User getUserByName(String userName);
+    User getUserByUserName(String userName);
     
-    void saveUser(User user);
+    void addUser(User user);
     
 }

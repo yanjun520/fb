@@ -14,14 +14,14 @@ public class UserServiceImpl implements UserService {
     private UserDAO userDAO;
     
     @Override
-    public User getUserByName(String userName) {
-        User user = userDAO.getUserByName(userName);
+    public User getUserByUserName(String userName) {
+        User user = userDAO.getUserByUserName(userName);
         return user;
     }
 
     @Override
-    public User getUserById(long id) {
-        User user = userDAO.getUserById(id);
+    public User getUserByUserId(long id) {
+        User user = userDAO.getUserByUserId(id);
         return user;
     }
 

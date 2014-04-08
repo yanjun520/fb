@@ -12,6 +12,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import com.fb.dao.UserDAO;
 import com.fb.po.User;
 import com.fb.service.LoginService;
+import com.fb.utils.LoginUtil;
 
 
 /**
@@ -34,9 +35,8 @@ public class LoginServiceImpl implements LoginService {
         if (cookies != null) {
             for (Cookie c : cookies) {
                 if (c.getName().equals("loginflag")) {
-                    String loginFalg = c.getValue();
-                    String[] loginArr = loginFalg.split("_");
-                    User user = userDAO.getUserByName(loginArr[0]);
+                    String[] loginArr = LoginUtil.decodeLoginFlag(c.getValue());
+                    User user = userDAO.getUserByUserName(loginArr[0]);
                     if (user != null && loginArr[1].equals(user.getPassword())) {
                         return user;
                     }
@@ -49,10 +49,10 @@ public class LoginServiceImpl implements LoginService {
     
     @Override
     public String login(HttpServletRequest request, HttpServletResponse response, User user) {
-        User dbUser = userDAO.getUserByName(user.getUserName());
+        User dbUser = userDAO.getUserByUserName(user.getUserName());
         
         if (dbUser != null && dbUser.getPassword().equals(user.getPassword())) {
-            String loginFalg = dbUser.getUserName() + "_" + dbUser.getPassword();
+            String loginFalg = LoginUtil.encodeLoginFlag(dbUser.getUserName(), dbUser.getPassword());
             Cookie cookie = new Cookie("loginflag", loginFalg);
             cookie.setPath("/");
             cookie.setMaxAge(86400);
@@ -65,8 +65,8 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public String regist(HttpServletRequest request, HttpServletResponse response, User user) {
-        userDAO.saveUser(user);
-        String loginFalg = user.getUserName() + "_" + user.getPassword();
+        userDAO.addUser(user);
+        String loginFalg = LoginUtil.encodeLoginFlag(user.getUserName(), user.getPassword());
         Cookie cookie = new Cookie("loginflag", loginFalg);
         cookie.setPath("/");
         cookie.setMaxAge(86400);

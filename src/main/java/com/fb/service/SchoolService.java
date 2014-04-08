@@ -14,6 +14,6 @@ public interface SchoolService {
     /**
      * 返回学校信息
      */
-    public School getSchoolInfo(int schoolId);
+    public School getSchoolBySchoolId(int schoolId);
     
 }

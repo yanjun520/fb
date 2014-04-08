@@ -4,8 +4,8 @@ import com.fb.po.User;
 
 public interface UserService {
     
-    public User getUserByName(String userName);
+    public User getUserByUserName(String userName);
     
-    public User getUserById(long uesrId);
+    public User getUserByUserId(long uesrId);
     
 }

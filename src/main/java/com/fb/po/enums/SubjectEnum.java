@@ -5,6 +5,12 @@ import java.util.Map;
 import com.google.common.collect.Maps;
 
 
+/**
+ * @author LGJ
+ *
+ * @date 2014年4月8日
+ * @desc 科目枚举
+ */
 public enum SubjectEnum {
 
     YUWEN(1, "语文"),
