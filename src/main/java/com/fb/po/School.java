@@ -53,6 +53,11 @@ public class School {
      */
     private int updateTime;
 
+    /**
+     * 删除标记字段，0表示有效，1表示删除
+     */
+    private int isDeleted;
+
     public long getSchoolId() {
         return schoolId;
     }
@@ -123,6 +128,14 @@ public class School {
 
     public void setUpdateTime(int updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public int getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(int isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
 }

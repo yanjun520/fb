@@ -2,22 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="UserSQL">
 
-	<select id="getUserById_sql" parameterType="long" resultType="User">   
+	<select id="getUserByUserId_sql" parameterType="long" resultType="User">   
 		<![CDATA[   
 		select * from user where userId=#{userId}   
 		]]>
 	</select>
 	
-	<select id="getUserByName_sql" parameterType="string" resultType="User">   
+	<select id="getUserListByUserIds_sql" resultType="User">   
+		select * from user where userId in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">  
+  		#{item}  
+ 		</foreach>
+	</select>
+	
+	<select id="getUserByUserName_sql" parameterType="string" resultType="User">   
 		<![CDATA[   
 		select * from user where userName=#{userName}   
 		]]>
 	</select>
 	
- 	<insert id="saveUser_sql" parameterType="User">
-		insert into user(userName,password)
+ 	<insert id="addUser_sql" parameterType="User" useGeneratedKeys="true" keyProperty="userId">
+		insert into user(userName,password,nickName,description)
 		values
-		(#{userName},#{password})
+		(#{userName},#{password},#{nickName},#{description})
 	</insert>
 
 </mapper>

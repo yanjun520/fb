@@ -1,6 +1,7 @@
 package com.fb.service;
 
 import com.fb.po.School;
+import com.fb.po.User;
 
 
 /**
@@ -14,6 +15,11 @@ public interface SchoolService {
     /**
      * 返回学校信息
      */
-    public School getSchoolBySchoolId(int schoolId);
+    public School getSchoolBySchoolId(User user, int schoolId);
+    
+    /**
+     * 新增学校
+     */
+    public void addSchool(User user, School school);
     
 }

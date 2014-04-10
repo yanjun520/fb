@@ -38,6 +38,11 @@ public class Subject {
      */
     private long clazzId;
 
+    /**
+     * 删除标记字段，0表示有效，1表示删除
+     */
+    private int isDeleted;
+
     public long getSubjectId() {
         return subjectId;
     }
@@ -84,6 +89,14 @@ public class Subject {
 
     public void setUpdateTime(int updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public int getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(int isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
 }

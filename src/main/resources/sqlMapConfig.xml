@@ -19,11 +19,19 @@
 	<typeAliases>
 		<typeAlias alias="Query" type="com.fb.po.Query" />
 		<typeAlias alias="User" type="com.fb.po.User" />
+		<typeAlias alias="Clazz" type="com.fb.po.Clazz" />
+		<typeAlias alias="UserClazzRelation" type="com.fb.po.UserClazzRelation" />
+		<typeAlias alias="Subject" type="com.fb.po.Subject" />
+		<typeAlias alias="Family" type="com.fb.po.Family" />
 	</typeAliases>
 
 	<!-- 指定映射器路径 -->
 	<mappers>
 		<mapper resource="com/fb/dao/sql/QuerySQL.xml" />
 		<mapper resource="com/fb/dao/sql/UserSQL.xml" />
+		<mapper resource="com/fb/dao/sql/ClazzSQL.xml" />
+		<mapper resource="com/fb/dao/sql/UserClazzRelationSQL.xml" />
+		<mapper resource="com/fb/dao/sql/SubjectSQL.xml" />
+		<mapper resource="com/fb/dao/sql/FamilySQL.xml" />
 	</mappers>
 </configuration>

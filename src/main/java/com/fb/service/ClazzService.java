@@ -3,8 +3,8 @@ package com.fb.service;
 import java.util.List;
 
 import com.fb.po.Clazz;
-import com.fb.po.Subject;
 import com.fb.po.User;
+import com.fb.po.enums.UserIdentityEnum;
 
 
 /**
@@ -18,27 +18,36 @@ public interface ClazzService {
     /**
      * 获取一个学校下的所有班级
      */
-    public List<Clazz> getClazzesBySchoolId(User user, int schoolId);
+//    public List<Clazz> getClazzesBySchoolId(User user, int schoolId);
     
     /**
      * 获取班级信息
      */
-    public Clazz getClazzByClazzId(User user, int clazzId);
+    public Clazz getClazzByClazzId(User user, long clazzId);
     
     /**
-     * 获取班级所有成员
+     * 获取班级所有成员（老师，学生）
      */
-    public List<User> getClazzMembers(User user, int clazzId);
+    public List<User> getAllClazzMembers(User user, long clazzId);
     
     /**
-     * 获取班级的所有学生
+     * 获取班级所有成员（老师，学生，家长）
      */
-    public List<User> getClazzStudents(User user, int clazzId);
+    public List<User> getAllClazzMembersWithParents(User user, long clazzId);
     
     /**
-     * 获取班级的所有科目
+     * 获取用户的所有班级
      */
-    public List<Subject> getClazzSubjects(User user, int clazzId);
+    public List<Clazz> getUserAllClazzes(User user, long userId);
     
+    /**
+     * 添加班级
+     */
+    public void addClazz(User user, Clazz clazz);
+    
+    /**
+     * 添加班级成员
+     */
+    public void addClazzMember(User user, long userId, long clazzId, UserIdentityEnum userType);
     
 }

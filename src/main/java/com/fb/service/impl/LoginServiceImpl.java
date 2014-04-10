@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.fb.Constant;
 import com.fb.dao.UserDAO;
 import com.fb.po.User;
 import com.fb.service.LoginService;
@@ -34,7 +35,7 @@ public class LoginServiceImpl implements LoginService {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie c : cookies) {
-                if (c.getName().equals("loginflag")) {
+                if (c.getName().equals(Constant.LOGIN_COOKIE_NAME)) {
                     String[] loginArr = LoginUtil.decodeLoginFlag(c.getValue());
                     User user = userDAO.getUserByUserName(loginArr[0]);
                     if (user != null && loginArr[1].equals(user.getPassword())) {
@@ -53,9 +54,9 @@ public class LoginServiceImpl implements LoginService {
         
         if (dbUser != null && dbUser.getPassword().equals(user.getPassword())) {
             String loginFalg = LoginUtil.encodeLoginFlag(dbUser.getUserName(), dbUser.getPassword());
-            Cookie cookie = new Cookie("loginflag", loginFalg);
+            Cookie cookie = new Cookie(Constant.LOGIN_COOKIE_NAME, loginFalg);
             cookie.setPath("/");
-            cookie.setMaxAge(86400);
+            cookie.setMaxAge(Constant.LOGIN_COOKIE_MAX_AGE);
             response.addCookie(cookie);
             
             return loginFalg;
@@ -67,7 +68,7 @@ public class LoginServiceImpl implements LoginService {
     public String regist(HttpServletRequest request, HttpServletResponse response, User user) {
         userDAO.addUser(user);
         String loginFalg = LoginUtil.encodeLoginFlag(user.getUserName(), user.getPassword());
-        Cookie cookie = new Cookie("loginflag", loginFalg);
+        Cookie cookie = new Cookie(Constant.LOGIN_COOKIE_NAME, loginFalg);
         cookie.setPath("/");
         cookie.setMaxAge(86400);
         response.addCookie(cookie);
@@ -76,7 +77,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public String logout(HttpServletRequest request, HttpServletResponse response) {
-        Cookie cookie = new Cookie("loginflag", null);
+        Cookie cookie = new Cookie(Constant.LOGIN_COOKIE_NAME, null);
         cookie.setPath("/");
         cookie.setMaxAge(0);
         response.addCookie(cookie);

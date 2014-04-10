@@ -9,6 +9,8 @@
  */
 package com.fb.dao.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -26,7 +28,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public User getUserByUserId(long userId) {
 		try {
-		    User result = sqlSession.selectOne("UserSQL.getUserById_sql", userId);
+		    User result = sqlSession.selectOne("UserSQL.getUserByUserId_sql", userId);
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -37,7 +39,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override
     public User getUserByUserName(String userName) {
         try {
-            User result = sqlSession.selectOne("UserSQL.getUserByName_sql", userName);
+            User result = sqlSession.selectOne("UserSQL.getUserByUserName_sql", userName);
             return result;
         } catch (Exception e) {
             e.printStackTrace();
@@ -48,9 +50,20 @@ public class UserDAOImpl implements UserDAO {
 	@Override
     public void addUser(User user) {
         try {
-            sqlSession.insert("UserSQL.saveUser_sql", user);
+            sqlSession.insert("UserSQL.addUser_sql", user);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<User> getUserListByUserIds(List<Long> userIds) {
+        try {
+            List<User> result = sqlSession.selectList("UserSQL.getUserListByUserIds_sql", userIds);
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 

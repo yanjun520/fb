@@ -14,10 +14,7 @@ public enum UserIdentityEnum {
 
     STUDENT(1),
     PARENT(2),
-    TEACHER(3),
-    STUDENT_ADMIN(4),
-    TEACHER_ADMIN(5),
-    SCHOOL_ADMIN(6);
+    TEACHER(3);
     
     private static final Map<Integer, UserIdentityEnum> intValueMap = Maps.newHashMap();
     static {

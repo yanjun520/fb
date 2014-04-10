@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserClazzRelationSQL">
+
+	<select id="getAllClazzMembers_sql" parameterType="long" resultType="UserClazzRelation">   
+		<![CDATA[   
+		select * from user_clazz_relation where clazzId=#{clazzId}  
+		]]>
+	</select>
+	
+	<select id="getClazzMembersByClazzIdAndUserType_sql" parameterType="UserClazzRelation" resultType="UserClazzRelation">   
+		<![CDATA[
+		select * from user_clazz_relation where clazzId=#{clazzId} and userType=#{userType}
+		]]>
+	</select>
+	
+	<select id="getUserAllClazzes_sql" parameterType="long" resultType="UserClazzRelation">   
+		<![CDATA[   
+		select * from user_clazz_relation where userId=#{userId}   
+		]]>
+	</select>
+	
+ 	<insert id="addUserClazzRelation_sql" parameterType="UserClazzRelation" useGeneratedKeys="true" keyProperty="id">
+		insert into user_clazz_relation(userId,userType,clazzId)
+		values
+		(#{userId},#{userType},#{clazzId})
+	</insert>
+
+</mapper>

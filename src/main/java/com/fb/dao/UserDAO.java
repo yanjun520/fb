@@ -1,5 +1,7 @@
 package com.fb.dao;
 
+import java.util.List;
+
 import com.fb.po.User;
 
 
@@ -12,6 +14,8 @@ import com.fb.po.User;
 public interface UserDAO {
 
     User getUserByUserId(long userId);
+    
+    List<User> getUserListByUserIds(List<Long> userIds);
     
     User getUserByUserName(String userName);
     

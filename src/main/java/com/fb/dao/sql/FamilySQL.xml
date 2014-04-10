@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FamilySQL">
+
+	<select id="getFamilyByUserIdAndClazzId_sql" parameterType="Family" resultType="Family">   
+		<![CDATA[   
+		select * from family where userId=#{studentId} and clazzId=#{clazzId}   
+		]]>
+	</select>
+	
+	<select id="getFamiliesByClazzId_sql" parameterType="long" resultType="Family">   
+		<![CDATA[   
+		select * from family where clazzId=#{clazzId}   
+		]]>
+	</select>
+	
+ 	<insert id="addFamily_sql" parameterType="Family" useGeneratedKeys="true" keyProperty="id">
+		insert into family(studentId,clazzId,parentId)
+		values
+		(#{studentId},#{clazzId},#{parentId})
+	</insert>
+
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SubjectSQL">
+
+	<select id="getAllClazzSubjects_sql" parameterType="long" resultType="Subject">   
+		<![CDATA[   
+		select * from subject where clazzId=#{clazzId}   
+		]]>
+	</select>
+	
+	<select id="getSubjectBySubjectId_sql" parameterType="long" resultType="Subject">   
+		<![CDATA[   
+		select * from subject where subjectId=#{subjectId}   
+		]]>
+	</select>
+	
+ 	<insert id="addSubject_sql" parameterType="Subject" useGeneratedKeys="true" keyProperty="subjectId">
+		insert into subject(subjectName,clazzId)
+		values
+		(#{subjectName},#{clazzId})
+	</insert>
+
+</mapper>
